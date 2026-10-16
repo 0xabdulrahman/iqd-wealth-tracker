@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>IQD Wealth & Expense Tracker</title>
+    <title>IQD Wealth & Expense Management Platform</title>
 
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -28,12 +28,12 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Firebase App & Database (Compatibility SDKs) -->
+    <!-- Firebase App & Database (Compat) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #020617;
@@ -41,14 +41,14 @@
             -webkit-tap-highlight-color: transparent;
         }
         .glass-panel {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
         .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .tab-content { display: none; }
@@ -69,11 +69,11 @@
 </head>
 <body class="pb-24 pt-16 min-h-screen text-slate-100 selection:bg-brand-500 selection:text-white">
 
-    <!-- TOP FIXED BAR -->
+    <!-- TOP HEADER -->
     <header class="fixed top-0 left-0 right-0 h-16 glass-panel z-40 px-4 flex items-center justify-between no-print">
         <div class="flex items-center space-x-2">
             <div class="p-2 bg-brand-500/20 text-brand-500 rounded-xl">
-                <i data-lucide="wallet" class="w-6 h-6"></i>
+                <i data-lucide="wallet" class="w-5 h-5"></i>
             </div>
             <div>
                 <h1 class="font-bold text-base leading-tight">IQD Wealth</h1>
@@ -82,13 +82,11 @@
         </div>
 
         <div class="flex items-center space-x-2">
-            <!-- Parallel Market Badge -->
             <button onclick="openRateModal()" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-medium hover:bg-amber-500/20 transition">
                 <i data-lucide="refresh-cw" id="rate-spin-icon" class="w-3.5 h-3.5"></i>
                 <span id="rate-badge-text">100$ = ... IQD</span>
             </button>
 
-            <!-- Firebase Sync Status Badge -->
             <div id="sync-status" class="flex items-center space-x-1 px-2 py-1 rounded-md bg-slate-800 text-slate-400 text-[11px] border border-slate-700">
                 <span class="w-2 h-2 rounded-full bg-slate-500" id="sync-dot"></span>
                 <span id="sync-text">Local</span>
@@ -96,16 +94,16 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
+    <!-- MAIN APP CONTAINER -->
     <main class="max-w-lg mx-auto px-4 space-y-6 pt-2">
 
-        <!-- TAB 1: DASHBOARD & OVERVIEW -->
+        <!-- TAB 1: DASHBOARD -->
         <section id="tab-dashboard" class="tab-content active space-y-5">
             <!-- Net Worth Card -->
-            <div class="glass-panel p-5 rounded-3xl relative overflow-hidden bg-gradient-to-br from-slate-900/90 to-brand-950/40 border-brand-500/20">
+            <div class="glass-panel p-5 rounded-3xl relative overflow-hidden bg-gradient-to-br from-slate-900/90 via-slate-900/60 to-brand-950/40 border-brand-500/20">
                 <div class="flex justify-between items-start mb-2">
                     <span class="text-xs text-slate-400 font-medium">Total Net Worth</span>
-                    <span class="text-xs px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-400 font-semibold" id="health-score-badge">Health: --/100</span>
+                    <span class="text-xs px-2.5 py-0.5 rounded-full bg-brand-500/20 text-brand-400 font-semibold" id="health-score-badge">Health: --/100</span>
                 </div>
                 <div class="flex items-baseline space-x-2">
                     <h2 class="text-3xl font-extrabold tracking-tight text-white" id="total-networth">0 <span class="text-sm font-normal text-slate-400">IQD</span></h2>
@@ -124,16 +122,16 @@
                 </div>
             </div>
 
-            <!-- AI Advisor & Insights -->
+            <!-- Insights / AI Advisor -->
             <div class="glass-card p-4 rounded-2xl border-indigo-500/20 bg-indigo-950/10">
-                <div class="flex items-center space-x-2 mb-2 text-indigo-400">
+                <div class="flex items-center space-x-2 mb-1.5 text-indigo-400">
                     <i data-lucide="sparkles" class="w-4 h-4"></i>
-                    <h3 class="text-xs font-bold uppercase tracking-wider">Financial Insights</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider">Financial Advisor</h3>
                 </div>
-                <p class="text-xs text-slate-300 leading-relaxed" id="ai-advisor-text">Analyzing cash flow and market conditions...</p>
+                <p class="text-xs text-slate-300 leading-relaxed" id="ai-advisor-text">Analyzing your financial state...</p>
             </div>
 
-            <!-- Quick Action Shortcuts -->
+            <!-- Quick Action Buttons -->
             <div class="grid grid-cols-4 gap-2">
                 <button onclick="openTxModal('income')" class="glass-card p-3 rounded-2xl flex flex-col items-center justify-center space-y-1 hover:bg-slate-800/80 transition">
                     <div class="p-2 rounded-xl bg-emerald-500/20 text-emerald-400"><i data-lucide="arrow-down-left" class="w-5 h-5"></i></div>
@@ -153,23 +151,26 @@
                 </button>
             </div>
 
-            <!-- Recent Transactions List -->
+            <!-- Recent Transactions Feed -->
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-sm font-bold text-slate-200">Recent Activity</h3>
-                    <button onclick="switchTab('statement')" class="text-xs text-brand-400 font-medium">View All</button>
+                    <h3 class="text-sm font-bold text-slate-200">Recent Transactions</h3>
+                    <button onclick="switchTab('statement')" class="text-xs text-brand-400 font-medium hover:underline">View All</button>
                 </div>
                 <div id="recent-transactions-list" class="space-y-2">
-                    <!-- Dynamic Transaction Items -->
+                    <!-- Dynamic Items -->
                 </div>
             </div>
         </section>
 
-        <!-- TAB 2: ACCOUNTS & WALLETS -->
+        <!-- TAB 2: WALLETS & ACCOUNTS -->
         <section id="tab-accounts" class="tab-content space-y-5">
             <div class="flex justify-between items-center">
-                <h2 class="text-base font-bold">Wallets & Accounts</h2>
-                <button onclick="openAccountModal()" class="px-3 py-1.5 rounded-xl bg-brand-500 text-white text-xs font-semibold flex items-center space-x-1">
+                <div>
+                    <h2 class="text-base font-bold">Wallets & Accounts</h2>
+                    <p class="text-[11px] text-slate-400">Manage cash, bank, and mobile wallets</p>
+                </div>
+                <button onclick="openAccountModal()" class="px-3 py-1.5 rounded-xl bg-brand-500 text-white text-xs font-semibold flex items-center space-x-1 shadow-lg shadow-brand-500/20">
                     <i data-lucide="plus" class="w-3.5 h-3.5"></i>
                     <span>Add Wallet</span>
                 </button>
@@ -179,36 +180,42 @@
             </div>
         </section>
 
-        <!-- TAB 3: INVESTMENTS & SAVINGS -->
+        <!-- TAB 3: SAVINGS & INVESTMENTS -->
         <section id="tab-investments" class="tab-content space-y-5">
             <!-- Vaults Header -->
             <div class="flex justify-between items-center">
-                <h2 class="text-base font-bold">Savings Vaults</h2>
-                <button onclick="openVaultModal()" class="px-3 py-1.5 rounded-xl bg-indigo-500 text-white text-xs font-semibold flex items-center space-x-1">
+                <div>
+                    <h2 class="text-base font-bold">Savings Vaults</h2>
+                    <p class="text-[11px] text-slate-400">Target savings & emergency funds</p>
+                </div>
+                <button onclick="openVaultModal()" class="px-3 py-1.5 rounded-xl bg-indigo-500 text-white text-xs font-semibold flex items-center space-x-1 shadow-lg shadow-indigo-500/20">
                     <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-                    <span>New Goal</span>
+                    <span>New Vault</span>
                 </button>
             </div>
             <div id="vaults-list" class="space-y-3">
-                <!-- Dynamic Savings Goals -->
+                <!-- Dynamic Vaults -->
             </div>
 
-            <!-- Investment Portfolio -->
+            <!-- Investments Header -->
             <div class="flex justify-between items-center pt-4 border-t border-slate-800">
-                <h2 class="text-base font-bold">Investment Assets</h2>
-                <button onclick="openInvestmentModal()" class="px-3 py-1.5 rounded-xl bg-amber-500 text-white text-xs font-semibold flex items-center space-x-1">
+                <div>
+                    <h2 class="text-base font-bold">Investment Assets</h2>
+                    <p class="text-[11px] text-slate-400">Gold, Real Estate, Stocks & Crypto</p>
+                </div>
+                <button onclick="openInvestmentModal()" class="px-3 py-1.5 rounded-xl bg-amber-500 text-white text-xs font-semibold flex items-center space-x-1 shadow-lg shadow-amber-500/20">
                     <i data-lucide="plus" class="w-3.5 h-3.5"></i>
                     <span>Add Asset</span>
                 </button>
             </div>
             <div id="investments-list" class="space-y-3">
-                <!-- Dynamic Investment Assets -->
+                <!-- Dynamic Investments -->
             </div>
         </section>
 
-        <!-- TAB 4: ANALYTICS & DIAGRAMS -->
+        <!-- TAB 4: DIAGRAMS & ANALYTICS -->
         <section id="tab-analytics" class="tab-content space-y-5">
-            <h2 class="text-base font-bold">Financial Analytics</h2>
+            <h2 class="text-base font-bold">Analytics & Diagrams</h2>
             
             <div class="glass-panel p-4 rounded-2xl">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Expenses by Category</h3>
@@ -225,36 +232,34 @@
             </div>
         </section>
 
-        <!-- TAB 5: STATEMENTS & EXPORTS -->
+        <!-- TAB 5: STATEMENTS & LEDGER -->
         <section id="tab-statement" class="tab-content space-y-5">
-            <h2 class="text-base font-bold">Account Statement</h2>
+            <h2 class="text-base font-bold">Financial Statement</h2>
             
             <div class="glass-panel p-4 rounded-2xl space-y-3 no-print">
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="text-[11px] text-slate-400 block mb-1">From Date</label>
-                        <input type="date" id="filter-start-date" class="w-full bg-slate-800 text-xs text-white p-2.5 rounded-xl border border-slate-700 outline-none">
+                        <input type="date" id="filter-start-date" onchange="renderStatement()" class="w-full bg-slate-800 text-xs text-white p-2.5 rounded-xl border border-slate-700 outline-none">
                     </div>
                     <div>
                         <label class="text-[11px] text-slate-400 block mb-1">To Date</label>
-                        <input type="date" id="filter-end-date" class="w-full bg-slate-800 text-xs text-white p-2.5 rounded-xl border border-slate-700 outline-none">
+                        <input type="date" id="filter-end-date" onchange="renderStatement()" class="w-full bg-slate-800 text-xs text-white p-2.5 rounded-xl border border-slate-700 outline-none">
                     </div>
                 </div>
                 <div class="flex space-x-2">
-                    <button onclick="renderStatement()" class="flex-1 py-2 rounded-xl bg-brand-500 text-white text-xs font-bold">Filter</button>
-                    <button onclick="exportCSV()" class="px-3 py-2 rounded-xl bg-slate-700 text-slate-200 text-xs font-bold"><i data-lucide="download" class="w-4 h-4"></i></button>
-                    <button onclick="window.print()" class="px-3 py-2 rounded-xl bg-slate-700 text-slate-200 text-xs font-bold"><i data-lucide="printer" class="w-4 h-4"></i></button>
+                    <button onclick="exportCSV()" class="flex-1 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-bold flex items-center justify-center space-x-1">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Export CSV</span>
+                    </button>
+                    <button onclick="window.print()" class="flex-1 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-bold flex items-center justify-center space-x-1">
+                        <i data-lucide="printer" class="w-4 h-4"></i>
+                        <span>Print PDF</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- Print Header -->
-            <div class="hidden print-only mb-6">
-                <h1 class="text-2xl font-bold text-black">Official Financial Statement</h1>
-                <p class="text-xs text-gray-600">Generated via IQD Wealth App | Parallel Market USD Conversion Included</p>
-                <div class="mt-2 text-xs border-b pb-2 text-gray-700" id="statement-print-meta"></div>
-            </div>
-
-            <!-- Ledger Table -->
+            <!-- Statement Table -->
             <div class="glass-panel rounded-2xl overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs">
@@ -263,11 +268,12 @@
                                 <th class="p-3">Date</th>
                                 <th class="p-3">Title</th>
                                 <th class="p-3">Category</th>
-                                <th class="p-3 text-right">Amount (IQD)</th>
+                                <th class="p-3 text-right">Amount</th>
+                                <th class="p-3 text-center no-print">Action</th>
                             </tr>
                         </thead>
                         <tbody id="statement-tbody" class="divide-y divide-slate-800">
-                            <!-- Statement Items -->
+                            <!-- Dynamic Table Rows -->
                         </tbody>
                     </table>
                 </div>
@@ -276,7 +282,7 @@
 
     </main>
 
-    <!-- FLOATING ACTION BUTTON (FAB) -->
+    <!-- FLOATING ACTION BUTTON -->
     <div class="fixed bottom-20 right-4 z-40 no-print">
         <button onclick="openTxModal('expense')" class="w-14 h-14 rounded-full bg-brand-500 text-white shadow-lg shadow-brand-500/30 flex items-center justify-center hover:scale-105 active:scale-95 transition">
             <i data-lucide="plus" class="w-7 h-7"></i>
@@ -309,7 +315,7 @@
         </div>
     </nav>
 
-    <!-- MODAL: ADD TRANSACTION -->
+    <!-- MODAL: ADD / EDIT TRANSACTION -->
     <div id="tx-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
         <div class="w-full max-w-lg glass-panel bg-slate-900 rounded-t-3xl sm:rounded-3xl p-5 space-y-4">
             <div class="flex justify-between items-center">
@@ -335,11 +341,11 @@
                         <label class="text-[11px] text-slate-400 block mb-1">Category</label>
                         <select id="tx-category" class="w-full bg-slate-800 text-xs text-white p-3 rounded-xl border border-slate-700 outline-none">
                             <option value="Food & Dining">Food & Dining</option>
-                            <option value="Generator & Electricity">Generator & Utilities</option>
+                            <option value="Generator & Utilities">Generator & Utilities</option>
                             <option value="Shopping & Clothes">Shopping</option>
                             <option value="Transport & Fuel">Transport & Fuel</option>
                             <option value="Health & Medical">Health & Medical</option>
-                            <option value="Salary & Business">Salary & Inflow</option>
+                            <option value="Salary & Inflow">Salary & Inflow</option>
                             <option value="General">General</option>
                         </select>
                     </div>
@@ -353,6 +359,52 @@
         </div>
     </div>
 
+    <!-- MODAL: ADD WALLET -->
+    <div id="wallet-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="w-full max-w-md glass-panel bg-slate-900 rounded-3xl p-5 space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-base">New Wallet Account</h3>
+                <button onclick="closeModal('wallet-modal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <form onsubmit="handleSaveWallet(event)" class="space-y-3">
+                <div>
+                    <label class="text-[11px] text-slate-400 block mb-1">Wallet Name</label>
+                    <input type="text" id="wallet-name" required placeholder="e.g., FastPay / FIB Account" class="w-full bg-slate-800 text-xs text-white p-3 rounded-xl border border-slate-700 outline-none">
+                </div>
+                <div>
+                    <label class="text-[11px] text-slate-400 block mb-1">Initial Balance (IQD)</label>
+                    <input type="number" id="wallet-balance" required placeholder="0" class="w-full bg-slate-800 text-sm font-bold text-white p-3 rounded-xl border border-slate-700 outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-brand-500 text-white font-bold text-xs">Create Wallet</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: TRANSFER BETWEEN WALLETS -->
+    <div id="transfer-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="w-full max-w-md glass-panel bg-slate-900 rounded-3xl p-5 space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-base">Transfer Funds</h3>
+                <button onclick="closeModal('transfer-modal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <form onsubmit="handleTransfer(event)" class="space-y-3">
+                <div>
+                    <label class="text-[11px] text-slate-400 block mb-1">From Wallet</label>
+                    <select id="transfer-from" class="w-full bg-slate-800 text-xs text-white p-3 rounded-xl border border-slate-700 outline-none"></select>
+                </div>
+                <div>
+                    <label class="text-[11px] text-slate-400 block mb-1">To Wallet</label>
+                    <select id="transfer-to" class="w-full bg-slate-800 text-xs text-white p-3 rounded-xl border border-slate-700 outline-none"></select>
+                </div>
+                <div>
+                    <label class="text-[11px] text-slate-400 block mb-1">Amount (IQD)</label>
+                    <input type="number" id="transfer-amount" required placeholder="0" class="w-full bg-slate-800 text-sm font-bold text-white p-3 rounded-xl border border-slate-700 outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-blue-500 text-white font-bold text-xs">Execute Transfer</button>
+            </form>
+        </div>
+    </div>
+
     <!-- MODAL: PARALLEL MARKET RATE SETTINGS -->
     <div id="rate-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="w-full max-w-md glass-panel bg-slate-900 rounded-3xl p-5 space-y-4">
@@ -361,7 +413,7 @@
                 <button onclick="closeModal('rate-modal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
             <p class="text-xs text-slate-400 leading-relaxed">
-                Set the current parallel/black market exchange rate per <strong>$100 USD</strong> in Iraqi Dinars.
+                Set current parallel market exchange rate per <strong>$100 USD</strong> in Iraqi Dinars.
             </p>
             <div class="space-y-3">
                 <div>
@@ -376,11 +428,8 @@
         </div>
     </div>
 
-    <!-- APPLICATION LOGIC & FIREBASE SCRIPT -->
+    <!-- MAIN SCRIPT -->
     <script>
-        // -------------------------------------------------------------
-        // FIREBASE CONFIGURATION
-        // -------------------------------------------------------------
         const firebaseConfig = {
             apiKey: "AIzaSyCk5q_3HZKfsEurpQvN3As5d7yaK92QfGE",
             authDomain: "iqd-wealth-tracker.firebaseapp.com",
@@ -394,16 +443,15 @@
         let db = null;
         let isFirebaseConnected = false;
 
-        // Default State Data
         let appData = {
-            usdRatePer100: 151750, // Default 1,517.5 IQD per $1
+            usdRatePer100: 151750,
             wallets: [
-                { id: 'w1', name: 'Physical Cash', balance: 450000, icon: 'banknote' },
+                { id: 'w1', name: 'Physical Cash', balance: 500000, icon: 'banknote' },
                 { id: 'w2', name: 'Zain Cash', balance: 250000, icon: 'smartphone' }
             ],
             transactions: [
-                { id: 't1', title: 'Monthly Salary', amount: 1250000, type: 'income', walletId: 'w1', category: 'Salary & Business', date: new Date().toISOString().split('T')[0] },
-                { id: 't2', title: 'Neighborhood Generator', amount: 65000, type: 'expense', walletId: 'w1', category: 'Generator & Electricity', date: new Date().toISOString().split('T')[0] }
+                { id: 't1', title: 'Monthly Salary', amount: 1500000, type: 'income', walletId: 'w1', category: 'Salary & Inflow', date: new Date().toISOString().split('T')[0] },
+                { id: 't2', title: 'Neighborhood Generator', amount: 75000, type: 'expense', walletId: 'w1', category: 'Generator & Utilities', date: new Date().toISOString().split('T')[0] }
             ],
             vaults: [
                 { id: 'v1', name: 'Emergency Fund', target: 2000000, current: 850000 }
@@ -413,7 +461,6 @@
             ]
         };
 
-        // Initialize App & Firebase
         window.addEventListener('DOMContentLoaded', () => {
             initFirebase();
             loadLocalStorageFallback();
@@ -421,14 +468,12 @@
             initCharts();
             renderAll();
             lucide.createIcons();
-            
-            // Set default date picker to today
             document.getElementById('tx-date').value = new Date().toISOString().split('T')[0];
         });
 
         function initFirebase() {
             try {
-                if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "") {
+                if (firebaseConfig.apiKey) {
                     firebase.initializeApp(firebaseConfig);
                     db = firebase.database();
                     isFirebaseConnected = true;
@@ -436,7 +481,6 @@
                     document.getElementById('sync-dot').className = "w-2 h-2 rounded-full bg-emerald-500";
                     document.getElementById('sync-text').innerText = "Live Firebase";
 
-                    // Sync listener
                     db.ref('wealth_data').on('value', (snapshot) => {
                         const val = snapshot.val();
                         if (val) {
@@ -447,7 +491,7 @@
                     });
                 }
             } catch (e) {
-                console.warn("Firebase initialized in Local Mode fallback:", e);
+                console.warn("Local mode fallback:", e);
             }
         }
 
@@ -466,32 +510,22 @@
         function loadLocalStorageFallback() {
             const local = localStorage.getItem('iqd_wealth_data');
             if (local) {
-                try {
-                    appData = JSON.parse(local);
-                } catch(e) {}
+                try { appData = JSON.parse(local); } catch(e) {}
             }
         }
 
-        // -------------------------------------------------------------
-        // PARALLEL MARKET USD EXCHANGE RATE ENGINE
-        // -------------------------------------------------------------
         async function fetchLiveMarketRate() {
             const icon = document.getElementById('rate-spin-icon');
             if(icon) icon.classList.add('animate-spin');
-            
             try {
-                // Fetching live rate with parallel market weighting
                 const res = await fetch('https://open.er-api.com/v6/latest/USD');
                 const data = await res.json();
                 if (data && data.rates && data.rates.IQD) {
-                    let officialRate = data.rates.IQD;
-                    // If API returns pegged rate (~1320), apply current parallel market spread factor (~1.149)
-                    let marketRatePerUSD = officialRate < 1400 ? officialRate * 1.1496 : officialRate;
-                    appData.usdRatePer100 = Math.round((marketRatePerUSD * 100) / 250) * 250;
+                    let rate = data.rates.IQD;
+                    let marketRate = rate < 1400 ? rate * 1.1496 : rate;
+                    appData.usdRatePer100 = Math.round((marketRate * 100) / 250) * 250;
                 }
-            } catch (e) {
-                console.log("Using cached market rate");
-            } finally {
+            } catch (e) {} finally {
                 if(icon) icon.classList.remove('animate-spin');
                 renderRateBadge();
                 renderAll();
@@ -513,22 +547,18 @@
             }
         }
 
-        // -------------------------------------------------------------
-        // CORE COMPUTATION & CALCULATIONS
-        // -------------------------------------------------------------
         function computeTotalNetWorth() {
-            let walletTotal = appData.wallets.reduce((acc, w) => acc + (w.balance || 0), 0);
-            let vaultTotal = appData.vaults.reduce((acc, v) => acc + (v.current || 0), 0);
-            let investTotal = appData.investments.reduce((acc, i) => acc + (i.currentValue || 0), 0);
+            let walletTotal = (appData.wallets || []).reduce((acc, w) => acc + (w.balance || 0), 0);
+            let vaultTotal = (appData.vaults || []).reduce((acc, v) => acc + (v.current || 0), 0);
+            let investTotal = (appData.investments || []).reduce((acc, i) => acc + (i.currentValue || 0), 0);
             return walletTotal + vaultTotal + investTotal;
         }
 
         function computeMonthlyMetrics() {
             const now = new Date();
-            const currentMonth = now.toISOString().slice(0, 7); // YYYY-MM
-
+            const currentMonth = now.toISOString().slice(0, 7);
             let inc = 0, exp = 0;
-            appData.transactions.forEach(t => {
+            (appData.transactions || []).forEach(t => {
                 if (t.date && t.date.startsWith(currentMonth)) {
                     if (t.type === 'income') inc += parseFloat(t.amount || 0);
                     if (t.type === 'expense') exp += parseFloat(t.amount || 0);
@@ -537,13 +567,10 @@
             return { inc, exp };
         }
 
-        // -------------------------------------------------------------
-        // RENDERING PIPELINE
-        // -------------------------------------------------------------
         function renderAll() {
             renderRateBadge();
             const netWorth = computeTotalNetWorth();
-            const ratePerDollar = appData.usdRatePer100 / 100;
+            const ratePerDollar = (appData.usdRatePer100 || 151750) / 100;
             const netWorthUSD = netWorth / ratePerDollar;
 
             document.getElementById('total-networth').innerHTML = `${netWorth.toLocaleString()} <span class="text-sm font-normal text-slate-400">IQD</span>`;
@@ -552,19 +579,6 @@
             const { inc, exp } = computeMonthlyMetrics();
             document.getElementById('monthly-income').innerText = `+${inc.toLocaleString()} IQD`;
             document.getElementById('monthly-expenses').innerText = `-${exp.toLocaleString()} IQD`;
-
-            // Health Score & Advice
-            let healthScore = 70;
-            if (inc > 0) {
-                let savingsRatio = (inc - exp) / inc;
-                healthScore = Math.min(100, Math.max(20, Math.round(savingsRatio * 100 + 40)));
-            }
-            document.getElementById('health-score-badge').innerText = `Health: ${healthScore}/100`;
-
-            let advice = "Your cash flow is stable. Keep building your emergency vault!";
-            if (exp > inc && inc > 0) advice = "Warning: Monthly expenses exceed income! Consider trimming dining and extra spending.";
-            else if (healthScore > 80) advice = "Excellent discipline! Consider converting excess cash reserves into physical gold or investments.";
-            document.getElementById('ai-advisor-text').innerText = advice;
 
             renderTransactionsList();
             renderWallets();
@@ -577,8 +591,7 @@
         function renderTransactionsList() {
             const list = document.getElementById('recent-transactions-list');
             list.innerHTML = '';
-            
-            let sorted = [...appData.transactions].sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+            let sorted = [...(appData.transactions || [])].sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
             
             if (sorted.length === 0) {
                 list.innerHTML = `<p class="text-xs text-slate-500 py-3 text-center">No transactions recorded yet.</p>`;
@@ -599,9 +612,12 @@
                             <p class="text-[10px] text-slate-400">${t.category} • ${t.date}</p>
                         </div>
                     </div>
-                    <span class="text-xs font-bold ${isInc ? 'text-emerald-400' : 'text-slate-200'}">
-                        ${isInc ? '+' : '-'}${parseFloat(t.amount).toLocaleString()} IQD
-                    </span>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs font-bold ${isInc ? 'text-emerald-400' : 'text-slate-200'}">
+                            ${isInc ? '+' : '-'}${parseFloat(t.amount).toLocaleString()} IQD
+                        </span>
+                        <button onclick="deleteTransaction('${t.id}')" class="text-slate-500 hover:text-rose-400 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                    </div>
                 `;
                 list.appendChild(div);
             });
@@ -610,11 +626,16 @@
 
         function renderWallets() {
             const grid = document.getElementById('wallets-grid');
-            const select = document.getElementById('tx-wallet');
-            grid.innerHTML = '';
-            select.innerHTML = '';
+            const selectTx = document.getElementById('tx-wallet');
+            const selectFrom = document.getElementById('transfer-from');
+            const selectTo = document.getElementById('transfer-to');
 
-            appData.wallets.forEach(w => {
+            grid.innerHTML = '';
+            selectTx.innerHTML = '';
+            selectFrom.innerHTML = '';
+            selectTo.innerHTML = '';
+
+            (appData.wallets || []).forEach(w => {
                 const div = document.createElement('div');
                 div.className = "glass-panel p-4 rounded-2xl flex items-center justify-between";
                 div.innerHTML = `
@@ -627,14 +648,19 @@
                             <p class="text-[10px] text-slate-400">Available Balance</p>
                         </div>
                     </div>
-                    <span class="text-sm font-extrabold text-white">${parseFloat(w.balance).toLocaleString()} IQD</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm font-extrabold text-white">${parseFloat(w.balance).toLocaleString()} IQD</span>
+                        <button onclick="deleteWallet('${w.id}')" class="text-slate-500 hover:text-rose-400 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
                 `;
                 grid.appendChild(div);
 
-                const opt = document.createElement('option');
-                opt.value = w.id;
-                opt.innerText = w.name;
-                select.appendChild(opt);
+                [selectTx, selectFrom, selectTo].forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = w.id;
+                    opt.innerText = w.name;
+                    s.appendChild(opt);
+                });
             });
             lucide.createIcons();
         }
@@ -642,31 +668,35 @@
         function renderVaults() {
             const list = document.getElementById('vaults-list');
             list.innerHTML = '';
-            appData.vaults.forEach(v => {
+            (appData.vaults || []).forEach(v => {
                 let pct = Math.min(100, Math.round((v.current / v.target) * 100));
                 const div = document.createElement('div');
                 div.className = "glass-panel p-4 rounded-2xl space-y-2";
                 div.innerHTML = `
                     <div class="flex justify-between items-center">
                         <h3 class="text-xs font-bold text-white">${v.name}</h3>
-                        <span class="text-xs font-bold text-indigo-400">${pct}%</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs font-bold text-indigo-400">${pct}%</span>
+                            <button onclick="deleteVault('${v.id}')" class="text-slate-500 hover:text-rose-400 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                        </div>
                     </div>
                     <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
                         <div class="bg-indigo-500 h-full rounded-full" style="width: ${pct}%"></div>
                     </div>
-                    <div class="flex justify-between text-[11px] text-slate-400">
-                        <span>${v.current.toLocaleString()} IQD</span>
-                        <span>Target: ${v.target.toLocaleString()} IQD</span>
+                    <div class="flex justify-between items-center text-[11px] text-slate-400 pt-1">
+                        <span>${v.current.toLocaleString()} / ${v.target.toLocaleString()} IQD</span>
+                        <button onclick="depositVault('${v.id}')" class="text-indigo-400 font-bold hover:underline">+ Deposit</button>
                     </div>
                 `;
                 list.appendChild(div);
             });
+            lucide.createIcons();
         }
 
         function renderInvestments() {
             const list = document.getElementById('investments-list');
             list.innerHTML = '';
-            appData.investments.forEach(i => {
+            (appData.investments || []).forEach(i => {
                 let profit = i.currentValue - i.buyPrice;
                 const div = document.createElement('div');
                 div.className = "glass-panel p-4 rounded-2xl flex items-center justify-between";
@@ -675,15 +705,19 @@
                         <h3 class="text-xs font-bold text-white">${i.name}</h3>
                         <p class="text-[10px] text-slate-400">Purchased: ${i.buyPrice.toLocaleString()} IQD</p>
                     </div>
-                    <div class="text-right">
-                        <span class="text-xs font-bold text-amber-400 block">${i.currentValue.toLocaleString()} IQD</span>
-                        <span class="text-[10px] ${profit >= 0 ? 'text-emerald-400' : 'text-rose-400'}">
-                            ${profit >= 0 ? '+' : ''}${profit.toLocaleString()} IQD
-                        </span>
+                    <div class="flex items-center space-x-3">
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-amber-400 block">${i.currentValue.toLocaleString()} IQD</span>
+                            <span class="text-[10px] ${profit >= 0 ? 'text-emerald-400' : 'text-rose-400'}">
+                                ${profit >= 0 ? '+' : ''}${profit.toLocaleString()} IQD
+                            </span>
+                        </div>
+                        <button onclick="deleteInvestment('${i.id}')" class="text-slate-500 hover:text-rose-400 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                     </div>
                 `;
                 list.appendChild(div);
             });
+            lucide.createIcons();
         }
 
         function renderStatement() {
@@ -691,7 +725,7 @@
             if(!tbody) return;
             tbody.innerHTML = '';
 
-            let filtered = [...appData.transactions].sort((a,b) => new Date(b.date) - new Date(a.date));
+            let filtered = [...(appData.transactions || [])].sort((a,b) => new Date(b.date) - new Date(a.date));
             
             filtered.forEach(t => {
                 const tr = document.createElement('tr');
@@ -703,14 +737,15 @@
                     <td class="p-3 text-right font-bold ${t.type === 'income' ? 'text-emerald-400' : 'text-slate-200'}">
                         ${t.type === 'income' ? '+' : '-'}${parseFloat(t.amount).toLocaleString()}
                     </td>
+                    <td class="p-3 text-center no-print">
+                        <button onclick="deleteTransaction('${t.id}')" class="text-slate-500 hover:text-rose-400 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                    </td>
                 `;
                 tbody.appendChild(tr);
             });
+            lucide.createIcons();
         }
 
-        // -------------------------------------------------------------
-        // TRANSACTION HANDLERS
-        // -------------------------------------------------------------
         function handleSaveTx(e) {
             e.preventDefault();
             const type = document.getElementById('tx-type').value;
@@ -721,9 +756,9 @@
             const date = document.getElementById('tx-date').value;
 
             const tx = { id: 't_' + Date.now(), title, amount, type, walletId, category, date };
+            if(!appData.transactions) appData.transactions = [];
             appData.transactions.push(tx);
 
-            // Adjust Wallet Balance
             const wallet = appData.wallets.find(w => w.id === walletId);
             if (wallet) {
                 if (type === 'income') wallet.balance += amount;
@@ -735,9 +770,82 @@
             document.getElementById('tx-form').reset();
         }
 
-        // -------------------------------------------------------------
-        // CHARTS ENGINE (CHART.JS)
-        // -------------------------------------------------------------
+        function deleteTransaction(id) {
+            const idx = appData.transactions.findIndex(t => t.id === id);
+            if (idx !== -1) {
+                const tx = appData.transactions[idx];
+                const wallet = appData.wallets.find(w => w.id === tx.walletId);
+                if (wallet) {
+                    if (tx.type === 'income') wallet.balance -= tx.amount;
+                    if (tx.type === 'expense') wallet.balance += tx.amount;
+                }
+                appData.transactions.splice(idx, 1);
+                pushData();
+            }
+        }
+
+        function handleSaveWallet(e) {
+            e.preventDefault();
+            const name = document.getElementById('wallet-name').value;
+            const balance = parseFloat(document.getElementById('wallet-balance').value);
+            appData.wallets.push({ id: 'w_' + Date.now(), name, balance, icon: 'credit-card' });
+            pushData();
+            closeModal('wallet-modal');
+        }
+
+        function deleteWallet(id) {
+            if(confirm("Are you sure you want to delete this wallet?")) {
+                appData.wallets = appData.wallets.filter(w => w.id !== id);
+                pushData();
+            }
+        }
+
+        function handleTransfer(e) {
+            e.preventDefault();
+            const fromId = document.getElementById('transfer-from').value;
+            const toId = document.getElementById('transfer-to').value;
+            const amount = parseFloat(document.getElementById('transfer-amount').value);
+
+            if (fromId === toId) return alert("Select different wallets!");
+
+            const wFrom = appData.wallets.find(w => w.id === fromId);
+            const wTo = appData.wallets.find(w => w.id === toId);
+
+            if (wFrom && wTo && wFrom.balance >= amount) {
+                wFrom.balance -= amount;
+                wTo.balance += amount;
+                pushData();
+                closeModal('transfer-modal');
+            } else {
+                alert("Insufficient wallet balance!");
+            }
+        }
+
+        function depositVault(id) {
+            const amt = prompt("Enter deposit amount (IQD):");
+            if (amt && !isNaN(amt)) {
+                const vault = appData.vaults.find(v => v.id === id);
+                if (vault) {
+                    vault.current += parseFloat(amt);
+                    pushData();
+                }
+            }
+        }
+
+        function deleteVault(id) {
+            if(confirm("Delete this savings goal?")) {
+                appData.vaults = appData.vaults.filter(v => v.id !== id);
+                pushData();
+            }
+        }
+
+        function deleteInvestment(id) {
+            if(confirm("Delete this asset?")) {
+                appData.investments = appData.investments.filter(i => i.id !== id);
+                pushData();
+            }
+        }
+
         let catChart = null, flowChart = null;
 
         function initCharts() {
@@ -758,26 +866,19 @@
 
         function updateCharts() {
             if(!catChart || !flowChart) return;
-            
-            // Expenses by Category
             let catTotals = {};
-            appData.transactions.filter(t => t.type === 'expense').forEach(t => {
+            (appData.transactions || []).filter(t => t.type === 'expense').forEach(t => {
                 catTotals[t.category] = (catTotals[t.category] || 0) + parseFloat(t.amount);
             });
-
             catChart.data.labels = Object.keys(catTotals);
             catChart.data.datasets[0].data = Object.values(catTotals);
             catChart.update();
 
-            // Cash Flow
             const { inc, exp } = computeMonthlyMetrics();
             flowChart.data.datasets[0].data = [inc, exp];
             flowChart.update();
         }
 
-        // -------------------------------------------------------------
-        // NAVIGATION & MODAL UTILITIES
-        // -------------------------------------------------------------
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('text-brand-400'));
@@ -793,17 +894,14 @@
             document.getElementById('tx-modal').classList.remove('hidden');
         }
 
-        function openRateModal() {
-            document.getElementById('rate-modal').classList.remove('hidden');
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-        }
+        function openAccountModal() { document.getElementById('wallet-modal').classList.remove('hidden'); }
+        function openTransferModal() { document.getElementById('transfer-modal').classList.remove('hidden'); }
+        function openRateModal() { document.getElementById('rate-modal').classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
         function exportCSV() {
             let csv = "Date,Title,Category,Type,Amount (IQD)\n";
-            appData.transactions.forEach(t => {
+            (appData.transactions || []).forEach(t => {
                 csv += `"${t.date}","${t.title}","${t.category}","${t.type}",${t.amount}\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv' });
