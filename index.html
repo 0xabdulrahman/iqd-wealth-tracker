@@ -88,7 +88,6 @@
       display: none !important;
     }
 
-    /* Mobile bottom navigation spacing */
     .pb-safe-nav {
       padding-bottom: 6rem;
     }
@@ -105,11 +104,11 @@
           <i data-lucide="wallet" class="w-4 h-4 sm:w-5 sm:h-5 text-slate-950 stroke-[2.5]"></i>
         </div>
         <div class="min-w-0">
-          <h1 class="font-extrabold text-sm sm:text-lg leading-tight tracking-tight text-white truncate">
+          <h1 class="font-extrabold text-sm sm:text-lg leading-tight tracking-tight text-white">
             IQD Wealth <span class="text-brand-400 font-bold">Vault</span>
           </h1>
           <div class="flex items-center space-x-1.5 text-[10px] sm:text-[11px] text-slate-400 font-medium truncate">
-            <span id="sync-status-dot" class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" title="Cloud Synced"></span>
+            <span id="sync-status-dot" class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0"></span>
             <button onclick="openModal('rate-modal')" class="hover:underline flex items-center text-slate-300 truncate">
               <span id="header-rate-badge" class="truncate">100 USD = 151,800 IQD</span>
               <i data-lucide="edit-3" class="w-3 h-3 ml-1 text-slate-400 flex-shrink-0"></i>
@@ -120,19 +119,16 @@
 
       <!-- Quick Controls -->
       <div class="flex items-center space-x-1.5 sm:space-x-3">
-        <!-- Currency Toggle -->
         <div class="flex items-center bg-slate-900 p-0.5 sm:p-1 rounded-xl border border-slate-800 text-[11px] sm:text-xs font-semibold">
           <button id="curr-iqd-btn" onclick="setGlobalCurrency('IQD')" class="px-2 py-1 rounded-lg bg-brand-600 text-slate-950 font-bold transition-all">IQD</button>
           <button id="curr-usd-btn" onclick="setGlobalCurrency('USD')" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white transition-all">USD</button>
         </div>
 
-        <!-- Add Transaction Button -->
         <button onclick="openTransactionModal()" class="flex items-center space-x-1 bg-gradient-to-r from-brand-600 to-emerald-500 text-slate-950 font-bold text-xs px-3 py-2 rounded-xl shadow-lg shadow-brand-500/20 active:scale-95">
           <i data-lucide="plus-circle" class="w-4 h-4 stroke-[2.5]"></i>
           <span class="hidden sm:inline">Add Record</span>
         </button>
 
-        <!-- Sync Cloud Button -->
         <button onclick="syncDataWithCloud(true)" title="Sync Cloud" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-800 active:scale-95">
           <i data-lucide="cloud-sync" class="w-4 h-4" id="sync-icon"></i>
         </button>
@@ -146,64 +142,59 @@
     <aside class="hidden md:block w-64 flex-shrink-0">
       <nav class="glass-panel rounded-2xl p-3 space-y-1 sticky top-24 shadow-xl border border-slate-800/60">
         <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all bg-brand-500/10 text-brand-400 border border-brand-500/20">
-          <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-          <span>Dashboard</span>
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i><span>Dashboard</span>
         </button>
         <button onclick="switchTab('transactions')" id="nav-transactions" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all">
-          <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
-          <span>Transactions</span>
+          <i data-lucide="arrow-left-right" class="w-4 h-4"></i><span>Transactions</span>
         </button>
         <button onclick="switchTab('analytics')" id="nav-analytics" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all">
-          <i data-lucide="pie-chart" class="w-4 h-4"></i>
-          <span>Analytics</span>
+          <i data-lucide="pie-chart" class="w-4 h-4"></i><span>Analytics</span>
         </button>
         <button onclick="switchTab('wallets')" id="nav-wallets" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all">
-          <i data-lucide="wallet-cards" class="w-4 h-4"></i>
-          <span>Multi-Wallet</span>
+          <i data-lucide="wallet-cards" class="w-4 h-4"></i><span>Multi-Wallet</span>
         </button>
         <button onclick="switchTab('vaults')" id="nav-vaults" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all">
-          <i data-lucide="piggy-bank" class="w-4 h-4"></i>
-          <span>Savings Vaults</span>
+          <i data-lucide="piggy-bank" class="w-4 h-4"></i><span>Savings Vaults</span>
         </button>
         <button onclick="switchTab('investments')" id="nav-investments" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all">
-          <i data-lucide="trending-up" class="w-4 h-4"></i>
-          <span>Investments</span>
+          <i data-lucide="trending-up" class="w-4 h-4"></i><span>Investments</span>
         </button>
         <button onclick="switchTab('bills')" id="nav-bills" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all">
-          <i data-lucide="calendar-clock" class="w-4 h-4"></i>
-          <span>Subscriptions</span>
+          <i data-lucide="calendar-clock" class="w-4 h-4"></i><span>Subscriptions</span>
         </button>
         <button onclick="switchTab('reports')" id="nav-reports" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all">
-          <i data-lucide="file-text" class="w-4 h-4"></i>
-          <span>PDF Statement</span>
+          <i data-lucide="file-text" class="w-4 h-4"></i><span>PDF Statement</span>
         </button>
         <button onclick="openModal('sync-modal')" class="w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm text-emerald-400 hover:bg-emerald-500/10 transition-all border border-emerald-500/20 mt-2">
-          <i data-lucide="settings" class="w-4 h-4"></i>
-          <span>Sync Settings</span>
+          <i data-lucide="settings" class="w-4 h-4"></i><span>Sync Settings</span>
         </button>
       </nav>
     </aside>
 
     <!-- MOBILE TOUCH BOTTOM NAVIGATION BAR -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 glass-panel border-t border-slate-800/90 px-1 py-2 flex items-center justify-around shadow-2xl backdrop-blur-xl">
-      <button onclick="switchTab('dashboard')" id="mobile-nav-dashboard" class="mobile-nav-item flex flex-col items-center py-1 px-3 rounded-xl text-brand-400">
+      <button onclick="switchTab('dashboard')" id="mobile-nav-dashboard" class="mobile-nav-item flex flex-col items-center py-1 px-2 rounded-xl text-brand-400">
         <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
         <span class="text-[10px] font-semibold mt-1">Home</span>
       </button>
-      <button onclick="switchTab('transactions')" id="mobile-nav-transactions" class="mobile-nav-item flex flex-col items-center py-1 px-3 rounded-xl text-slate-400">
+      <button onclick="switchTab('transactions')" id="mobile-nav-transactions" class="mobile-nav-item flex flex-col items-center py-1 px-2 rounded-xl text-slate-400">
         <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
         <span class="text-[10px] font-semibold mt-1">Records</span>
       </button>
       <button onclick="openTransactionModal()" class="flex flex-col items-center justify-center -mt-5 w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 to-emerald-400 text-slate-950 font-bold shadow-lg shadow-brand-500/30">
         <i data-lucide="plus" class="w-6 h-6 stroke-[3]"></i>
       </button>
-      <button onclick="switchTab('analytics')" id="mobile-nav-analytics" class="mobile-nav-item flex flex-col items-center py-1 px-3 rounded-xl text-slate-400">
+      <button onclick="switchTab('analytics')" id="mobile-nav-analytics" class="mobile-nav-item flex flex-col items-center py-1 px-2 rounded-xl text-slate-400">
         <i data-lucide="pie-chart" class="w-5 h-5"></i>
         <span class="text-[10px] font-semibold mt-1">Charts</span>
       </button>
-      <button onclick="switchTab('wallets')" id="mobile-nav-wallets" class="mobile-nav-item flex flex-col items-center py-1 px-3 rounded-xl text-slate-400">
+      <button onclick="switchTab('wallets')" id="mobile-nav-wallets" class="mobile-nav-item flex flex-col items-center py-1 px-2 rounded-xl text-slate-400">
         <i data-lucide="wallet-cards" class="w-5 h-5"></i>
         <span class="text-[10px] font-semibold mt-1">Wallets</span>
+      </button>
+      <button onclick="openModal('mobile-more-menu')" id="mobile-nav-more" class="mobile-nav-item flex flex-col items-center py-1 px-2 rounded-xl text-slate-400">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+        <span class="text-[10px] font-semibold mt-1">More</span>
       </button>
     </div>
 
@@ -212,10 +203,7 @@
 
       <!-- DASHBOARD TAB -->
       <section id="tab-dashboard" class="tab-content space-y-4 sm:space-y-6 animate-fade-in">
-        
-        <!-- Summary Cards Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <!-- Net Worth Balance -->
           <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden">
             <div class="flex items-center justify-between text-slate-400 mb-2">
               <span class="text-xs font-semibold uppercase tracking-wider">Total Net Worth</span>
@@ -228,7 +216,6 @@
             </div>
           </div>
 
-          <!-- Total Income Card -->
           <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden">
             <div class="flex items-center justify-between text-slate-400 mb-2">
               <span class="text-xs font-semibold uppercase tracking-wider">Monthly Income</span>
@@ -241,7 +228,6 @@
             </div>
           </div>
 
-          <!-- Total Expenses Card -->
           <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden">
             <div class="flex items-center justify-between text-slate-400 mb-2">
               <span class="text-xs font-semibold uppercase tracking-wider">Monthly Expenses</span>
@@ -254,7 +240,6 @@
             </div>
           </div>
 
-          <!-- Market Exchange Rate Card -->
           <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden border-amber-500/20">
             <div class="flex items-center justify-between text-slate-400 mb-2">
               <span class="text-xs font-semibold uppercase tracking-wider">Parallel Rate</span>
@@ -271,10 +256,7 @@
           </div>
         </div>
 
-        <!-- Quick Charts & Recent Activity -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-          
-          <!-- Cashflow Chart -->
           <div class="lg:col-span-2 glass-panel rounded-2xl p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between">
               <div>
@@ -288,7 +270,6 @@
             </div>
           </div>
 
-          <!-- Category Breakdown -->
           <div class="glass-panel rounded-2xl p-4 sm:p-5 space-y-4">
             <div>
               <h3 class="text-sm sm:text-base font-bold text-white">Expense Distribution</h3>
@@ -300,7 +281,6 @@
           </div>
         </div>
 
-        <!-- Recent Transactions Preview -->
         <div class="glass-panel rounded-2xl p-4 sm:p-5 space-y-4">
           <div class="flex items-center justify-between">
             <h3 class="text-sm sm:text-base font-bold text-white">Recent Transactions</h3>
@@ -308,11 +288,8 @@
               View All <i data-lucide="chevron-right" class="w-4 h-4 ml-0.5"></i>
             </button>
           </div>
-          <div id="dash-recent-list" class="divide-y divide-slate-800/80">
-            <!-- Dynamic Recent Items -->
-          </div>
+          <div id="dash-recent-list" class="divide-y divide-slate-800/80"></div>
         </div>
-
       </section>
 
       <!-- TRANSACTIONS TAB -->
@@ -333,7 +310,6 @@
             </div>
           </div>
 
-          <!-- Transaction Responsive View (Table for Desktop, Cards for Mobile) -->
           <div class="hidden sm:block overflow-x-auto">
             <table class="w-full text-left text-xs">
               <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
@@ -345,15 +321,10 @@
                   <th class="p-3 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody id="full-transactions-tbody" class="divide-y divide-slate-800/60">
-                <!-- Dynamic Rows -->
-              </tbody>
+              <tbody id="full-transactions-tbody" class="divide-y divide-slate-800/60"></tbody>
             </table>
           </div>
-          <!-- Mobile Card List View -->
-          <div id="full-transactions-mobile-list" class="sm:hidden space-y-2.5">
-            <!-- Dynamic Mobile Cards -->
-          </div>
+          <div id="full-transactions-mobile-list" class="sm:hidden space-y-2.5"></div>
         </div>
       </section>
 
@@ -362,15 +333,11 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           <div class="glass-panel rounded-2xl p-4 sm:p-5 space-y-4">
             <h3 class="text-sm sm:text-base font-bold text-white">Expense Category Share</h3>
-            <div class="h-60 sm:h-64">
-              <canvas id="analyticsCategoryChart"></canvas>
-            </div>
+            <div class="h-60 sm:h-64"><canvas id="analyticsCategoryChart"></canvas></div>
           </div>
           <div class="glass-panel rounded-2xl p-4 sm:p-5 space-y-4">
             <h3 class="text-sm sm:text-base font-bold text-white">Income vs Spending Ratio</h3>
-            <div class="h-60 sm:h-64">
-              <canvas id="analyticsRatioChart"></canvas>
-            </div>
+            <div class="h-60 sm:h-64"><canvas id="analyticsRatioChart"></canvas></div>
           </div>
         </div>
       </section>
@@ -383,14 +350,10 @@
             <p class="text-[11px] sm:text-xs text-slate-400">Cash, TBI, ZainCash & Parallel USD Accounts</p>
           </div>
           <button onclick="openWalletModal()" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
-            <i data-lucide="plus-circle" class="w-4 h-4"></i>
-            <span>Add Wallet</span>
+            <i data-lucide="plus-circle" class="w-4 h-4"></i><span>Add Wallet</span>
           </button>
         </div>
-
-        <div id="wallets-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          <!-- Dynamic Wallet Cards -->
-        </div>
+        <div id="wallets-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div>
       </section>
 
       <!-- SAVINGS VAULTS TAB -->
@@ -401,14 +364,10 @@
             <p class="text-[11px] sm:text-xs text-slate-400">Goal-oriented savings converted dynamically</p>
           </div>
           <button onclick="openVaultModal()" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
-            <i data-lucide="target" class="w-4 h-4"></i>
-            <span>Add Vault</span>
+            <i data-lucide="target" class="w-4 h-4"></i><span>Add Vault</span>
           </button>
         </div>
-
-        <div id="vaults-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          <!-- Dynamic Vault Cards -->
-        </div>
+        <div id="vaults-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div>
       </section>
 
       <!-- INVESTMENTS TAB -->
@@ -419,14 +378,10 @@
             <p class="text-[11px] sm:text-xs text-slate-400">Iraqi Gold Miskals, Real Estate & Parallel Holdings</p>
           </div>
           <button onclick="openInvestmentModal()" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
-            <i data-lucide="trending-up" class="w-4 h-4"></i>
-            <span>Add Asset</span>
+            <i data-lucide="trending-up" class="w-4 h-4"></i><span>Add Asset</span>
           </button>
         </div>
-
-        <div id="investments-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          <!-- Dynamic Investment Cards -->
-        </div>
+        <div id="investments-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div>
       </section>
 
       <!-- SUBSCRIPTIONS & BILLS TAB -->
@@ -437,14 +392,10 @@
             <p class="text-[11px] sm:text-xs text-slate-400">Generator, Fiber Internet & Rent tracking</p>
           </div>
           <button onclick="openBillModal()" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
-            <i data-lucide="plus" class="w-4 h-4"></i>
-            <span>Add Bill</span>
+            <i data-lucide="plus" class="w-4 h-4"></i><span>Add Bill</span>
           </button>
         </div>
-
-        <div id="bills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          <!-- Dynamic Bill Cards -->
-        </div>
+        <div id="bills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div>
       </section>
 
       <!-- PDF REPORTS TAB -->
@@ -468,28 +419,57 @@
     </main>
   </div>
 
-  <!-- MODALS -->
+  <!-- MOBILE MORE MENU MODAL -->
+  <div id="mobile-more-menu" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="glass-panel w-full sm:max-w-md rounded-t-3xl sm:rounded-2xl p-6 border border-slate-700/80 shadow-2xl relative space-y-3 animate-slide-up">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <h3 class="text-base font-bold text-white">More Sections & Tools</h3>
+        <button onclick="closeModal('mobile-more-menu')" class="text-slate-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="grid grid-cols-2 gap-2.5 pt-1">
+        <button onclick="switchTab('vaults'); closeModal('mobile-more-menu');" class="flex items-center space-x-2.5 p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 text-xs font-semibold border border-slate-800">
+          <i data-lucide="piggy-bank" class="w-4 h-4 text-brand-400"></i>
+          <span>Savings Vaults</span>
+        </button>
+        <button onclick="switchTab('investments'); closeModal('mobile-more-menu');" class="flex items-center space-x-2.5 p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 text-xs font-semibold border border-slate-800">
+          <i data-lucide="trending-up" class="w-4 h-4 text-emerald-400"></i>
+          <span>Investments</span>
+        </button>
+        <button onclick="switchTab('bills'); closeModal('mobile-more-menu');" class="flex items-center space-x-2.5 p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 text-xs font-semibold border border-slate-800">
+          <i data-lucide="calendar-clock" class="w-4 h-4 text-amber-400"></i>
+          <span>Subscriptions</span>
+        </button>
+        <button onclick="switchTab('reports'); closeModal('mobile-more-menu');" class="flex items-center space-x-2.5 p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 text-xs font-semibold border border-slate-800">
+          <i data-lucide="file-text" class="w-4 h-4 text-sky-400"></i>
+          <span>PDF Statement</span>
+        </button>
+      </div>
+      <button onclick="openModal('sync-modal'); closeModal('mobile-more-menu');" class="w-full flex items-center justify-center space-x-2 p-3 rounded-xl bg-emerald-500/10 text-emerald-400 text-xs font-semibold border border-emerald-500/20 mt-2">
+        <i data-lucide="settings" class="w-4 h-4"></i>
+        <span>Cloud Sync Settings</span>
+      </button>
+    </div>
+  </div>
 
   <!-- Cloud Sync Config Modal -->
   <div id="sync-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-slate-700/80 shadow-2xl relative">
-      <button onclick="closeModal('sync-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
+      <button onclick="closeModal('sync-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       <div class="flex items-center space-x-2 mb-3">
         <i data-lucide="cloud" class="w-5 h-5 text-emerald-400"></i>
         <h3 class="text-lg font-bold text-white">Cross-Device Cloud Sync</h3>
       </div>
-      <p class="text-xs text-slate-400 mb-4">To sync your data between phone and laptop, paste your free JSONBin.io Bin ID below. (If empty, a secure default cloud bin is automatically generated and saved).</p>
-      
+      <p class="text-xs text-slate-400 mb-4">Paste your free JSONBin.io Bin ID below to sync between phone and laptop instantly.</p>
       <form onsubmit="handleSaveSyncConfig(event)" class="space-y-4">
         <div>
           <label class="block text-xs text-slate-300 mb-1">JSONBin Bin ID</label>
-          <input type="text" id="input-bin-id" placeholder="e.g. 665abcde..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
+          <input type="text" id="input-bin-id" placeholder="e.g. 670f5e71..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
         </div>
         <div class="flex space-x-2">
           <button type="button" onclick="createNewCloudBin()" class="w-1/2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-2.5 rounded-xl font-semibold">Generate New Bin</button>
-          <button type="submit" class="w-1/2 bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Save Sync ID</button>
+          <button type="submit" class="w-1/2 bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs py-2.5 rounded-xl uppercase">Save Sync ID</button>
         </div>
       </form>
     </div>
@@ -498,9 +478,7 @@
   <!-- Parallel Rate Settings Modal -->
   <div id="rate-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-slate-700/80 shadow-2xl relative">
-      <button onclick="closeModal('rate-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
+      <button onclick="closeModal('rate-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       <div class="flex items-center space-x-2 mb-4">
         <i data-lucide="landmark" class="w-5 h-5 text-amber-400"></i>
         <h3 class="text-lg font-bold text-white">USD / IQD Parallel Market Rate</h3>
@@ -509,12 +487,12 @@
         <div>
           <label class="block text-xs text-slate-300 mb-1">Price in IQD for 100 USD ($100)</label>
           <div class="relative">
-            <input type="number" id="input-rate-100" required step="100" placeholder="e.g. 151800" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-amber-300 font-bold focus:outline-none focus:border-brand-500">
+            <input type="number" id="input-rate-100" required step="100" placeholder="e.g. 151800" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-amber-300 font-bold focus:outline-none">
             <span class="absolute right-3 top-2.5 text-xs text-slate-500">IQD</span>
           </div>
           <p class="text-[11px] text-slate-400 mt-1">Calculated 1 USD = <span id="preview-single-rate" class="text-emerald-400 font-semibold">1,518 IQD</span></p>
         </div>
-        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">Save Rate</button>
+        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs py-2.5 rounded-xl uppercase">Save Rate</button>
       </form>
     </div>
   </div>
@@ -522,26 +500,24 @@
   <!-- Add/Edit Transaction Modal -->
   <div id="transaction-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-slate-700/80 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-      <button onclick="closeModal('transaction-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
+      <button onclick="closeModal('transaction-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       <h3 id="tx-modal-title" class="text-lg font-bold text-white mb-4">Add Transaction</h3>
       <form id="tx-form" onsubmit="handleSaveTransaction(event)" class="space-y-4">
         <input type="hidden" id="tx-edit-id" value="">
         <div>
           <label class="block text-xs text-slate-400 mb-1">Type</label>
-          <select id="tx-type" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none">
+          <select id="tx-type" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
             <option value="EXPENSE">Expense</option>
             <option value="INCOME">Income</option>
           </select>
         </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">Amount (IQD)</label>
-          <input type="number" id="tx-amount" required placeholder="e.g. 50000" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none">
+          <input type="number" id="tx-amount" required placeholder="e.g. 50000" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
         </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">Category</label>
-          <select id="tx-category" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none">
+          <select id="tx-category" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
             <option value="Generator & Electricity">Generator & Electricity</option>
             <option value="Food & Dining">Food & Dining</option>
             <option value="Shopping & Retail">Shopping & Retail</option>
@@ -553,9 +529,9 @@
         </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">Description</label>
-          <input type="text" id="tx-desc" required placeholder="e.g. Neighborhood Generator Fee" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none">
+          <input type="text" id="tx-desc" required placeholder="e.g. Neighborhood Generator Fee" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
         </div>
-        <button type="submit" id="tx-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Transaction</button>
+        <button type="submit" id="tx-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase">Save Transaction</button>
       </form>
     </div>
   </div>
@@ -563,9 +539,7 @@
   <!-- Wallet Modal -->
   <div id="wallet-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-slate-700/80 shadow-2xl relative">
-      <button onclick="closeModal('wallet-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
+      <button onclick="closeModal('wallet-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       <h3 id="wallet-modal-title" class="text-lg font-bold text-white mb-4">Add Wallet</h3>
       <form onsubmit="handleSaveWallet(event)" class="space-y-4">
         <input type="hidden" id="wallet-edit-id" value="">
@@ -585,7 +559,7 @@
             <option value="Digital">Digital Wallet</option>
           </select>
         </div>
-        <button type="submit" id="wallet-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Wallet</button>
+        <button type="submit" id="wallet-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase">Save Wallet</button>
       </form>
     </div>
   </div>
@@ -593,9 +567,7 @@
   <!-- Vault Modal -->
   <div id="vault-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-slate-700/80 shadow-2xl relative">
-      <button onclick="closeModal('vault-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
+      <button onclick="closeModal('vault-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       <h3 id="vault-modal-title" class="text-lg font-bold text-white mb-4">Create Savings Vault</h3>
       <form onsubmit="handleSaveVault(event)" class="space-y-4">
         <input type="hidden" id="vault-edit-id" value="">
@@ -611,7 +583,7 @@
           <label class="block text-xs text-slate-400 mb-1">Current Saved (IQD)</label>
           <input type="number" id="vault-current" required placeholder="e.g. 300000" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
         </div>
-        <button type="submit" id="vault-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Vault</button>
+        <button type="submit" id="vault-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase">Save Vault</button>
       </form>
     </div>
   </div>
@@ -619,9 +591,7 @@
   <!-- Investment Modal -->
   <div id="investment-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-slate-700/80 shadow-2xl relative">
-      <button onclick="closeModal('investment-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
+      <button onclick="closeModal('investment-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       <h3 id="investment-modal-title" class="text-lg font-bold text-white mb-4">Add Asset</h3>
       <form onsubmit="handleSaveInvestment(event)" class="space-y-4">
         <input type="hidden" id="inv-edit-id" value="">
@@ -637,7 +607,7 @@
           <label class="block text-xs text-slate-400 mb-1">Estimated Return</label>
           <input type="text" id="inv-return" required placeholder="e.g. +7.5%" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
         </div>
-        <button type="submit" id="inv-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Asset</button>
+        <button type="submit" id="inv-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase">Save Asset</button>
       </form>
     </div>
   </div>
@@ -645,9 +615,7 @@
   <!-- Bill Modal -->
   <div id="bill-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-slate-700/80 shadow-2xl relative">
-      <button onclick="closeModal('bill-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
+      <button onclick="closeModal('bill-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       <h3 id="bill-modal-title" class="text-lg font-bold text-white mb-4">Add Recurring Bill</h3>
       <form onsubmit="handleSaveBill(event)" class="space-y-4">
         <input type="hidden" id="bill-edit-id" value="">
@@ -663,7 +631,7 @@
           <label class="block text-xs text-slate-400 mb-1">Due Date</label>
           <input type="text" id="bill-date" required placeholder="e.g. 1st of month" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
         </div>
-        <button type="submit" id="bill-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Bill</button>
+        <button type="submit" id="bill-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase">Save Bill</button>
       </form>
     </div>
   </div>
@@ -676,8 +644,6 @@
     let globalCurrency = 'IQD';
     let marketIqdPerUsd = parseFloat(localStorage.getItem('iqd_parallel_rate')) || 1518;
     let isManualRate = localStorage.getItem('iqd_rate_manual') === 'true';
-
-    // Cloud Sync Configuration (JSONBin.io free REST storage)
     let cloudBinId = localStorage.getItem('iqd_cloud_bin_id') || '670f5e71acd3cb34a892b1a2';
     
     let transactions = [];
@@ -694,10 +660,7 @@
     window.onload = async function() {
       lucide.createIcons();
       document.getElementById('input-bin-id').value = cloudBinId;
-      
-      // Pull latest from cloud storage on startup
       await syncDataFromCloud();
-      
       updateRateUI();
       renderAllData();
       initCharts();
@@ -712,14 +675,13 @@
       }
     };
 
-    // CLOUD SYNC FUNCTIONS
     async function syncDataFromCloud() {
       const dot = document.getElementById('sync-status-dot');
       if (dot) dot.className = 'inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse';
 
       try {
         const response = await fetch(`https://api.jsonbin.io/v3/b/${cloudBinId}/latest`, {
-          headers: { 'X-Master-Key': '$2a$10$7R9K9X...fallback' } // public public read enabled bin or fallback
+          headers: { 'X-Master-Key': '$2a$10$7R9K9X...' }
         });
         if (response.ok) {
           const resJson = await response.json();
@@ -734,7 +696,6 @@
           }
         }
       } catch (err) {
-        console.warn('Using local fallback state:', err);
         loadLocalFallback();
       } finally {
         if (dot) dot.className = 'inline-block w-2 h-2 rounded-full bg-emerald-500';
@@ -743,8 +704,6 @@
 
     async function syncDataWithCloud(showNotification = false) {
       const payload = { transactions, wallets, vaults, investments, bills, marketRate: marketIqdPerUsd };
-      
-      // Save locally instantly
       localStorage.setItem('iqd_txs', JSON.stringify(transactions));
       localStorage.setItem('iqd_wallets', JSON.stringify(wallets));
       localStorage.setItem('iqd_vaults', JSON.stringify(vaults));
@@ -755,15 +714,12 @@
       try {
         await fetch(`https://api.jsonbin.io/v3/b/${cloudBinId}`, {
           method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Master-Key': '$2a$10$7R9K9X...'
-          },
+          headers: { 'Content-Type': 'application/json', 'X-Master-Key': '$2a$10$7R9K9X...' },
           body: JSON.stringify(payload)
         });
         if (showNotification) showToast('Data synchronized across all devices!');
       } catch (err) {
-        if (showNotification) showToast('Saved locally (Cloud sync idle)');
+        if (showNotification) showToast('Saved locally');
       }
     }
 
@@ -782,20 +738,16 @@
         cloudBinId = newId;
         localStorage.setItem('iqd_cloud_bin_id', cloudBinId);
         closeModal('sync-modal');
-        syncDataFromCloud().then(() => { renderAllData(); showToast('Cloud Bin ID updated & synced!'); });
+        syncDataFromCloud().then(() => { renderAllData(); showToast('Cloud Bin ID updated!'); });
       }
     }
 
     async function createNewCloudBin() {
-      showToast('Generating new cloud storage bin...');
+      showToast('Generating cloud bin...');
       try {
         const response = await fetch('https://api.jsonbin.io/v3/b', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Master-Key': '$2a$10$7R9K9X...',
-            'X-Bin-Private': 'false'
-          },
+          headers: { 'Content-Type': 'application/json', 'X-Master-Key': '$2a$10$7R9K9X...', 'X-Bin-Private': 'false' },
           body: JSON.stringify({ transactions: [], wallets: [], vaults: [], investments: [], bills: [] })
         });
         const json = await response.json();
@@ -803,30 +755,28 @@
           cloudBinId = json.metadata.id;
           document.getElementById('input-bin-id').value = cloudBinId;
           localStorage.setItem('iqd_cloud_bin_id', cloudBinId);
-          showToast('New cloud bin created successfully!');
+          showToast('New cloud bin created!');
         }
       } catch (e) {
-        showToast('Error creating bin. You can paste your own.');
+        showToast('Error creating bin.');
       }
     }
 
     async function fetchMarketExchangeRate(isUserAction = false) {
       const icon = document.getElementById('refresh-rate-icon');
       if (icon) icon.classList.add('animate-spin');
-
       try {
         const response = await fetch('https://open.er-api.com/v6/latest/USD');
         const data = await response.json();
         if (data && data.rates && data.rates.IQD) {
           if (data.rates.IQD >= 1450 && !isManualRate) marketIqdPerUsd = Math.round(data.rates.IQD);
         }
-      } catch (err) {
-        console.warn('Rate fetch fallback');
-      } finally {
+      } catch (err) {}
+      finally {
         if (icon) icon.classList.remove('animate-spin');
         updateRateUI();
         renderAllData();
-        if (isUserAction) showToast(`Parallel rate updated to ${(marketIqdPerUsd * 100).toLocaleString()} IQD per $100`);
+        if (isUserAction) showToast(`Parallel rate updated!`);
       }
     }
 
@@ -850,7 +800,7 @@
         closeModal('rate-modal');
         renderAllData();
         syncDataWithCloud();
-        showToast('Parallel market exchange rate set!');
+        showToast('Parallel rate set!');
       }
     }
 
@@ -886,10 +836,10 @@
       if (activeNav) activeNav.className = "nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all bg-brand-500/10 text-brand-400 border border-brand-500/20";
 
       document.querySelectorAll('.mobile-nav-item').forEach(mNav => {
-        mNav.className = "mobile-nav-item flex flex-col items-center py-1 px-3 rounded-xl text-slate-400";
+        if (mNav.id !== 'mobile-nav-more') mNav.className = "mobile-nav-item flex flex-col items-center py-1 px-2 rounded-xl text-slate-400";
       });
       const activeMobileNav = document.getElementById(`mobile-nav-${tabId}`);
-      if (activeMobileNav) activeMobileNav.className = "mobile-nav-item flex flex-col items-center py-1 px-3 rounded-xl text-brand-400";
+      if (activeMobileNav) activeMobileNav.className = "mobile-nav-item flex flex-col items-center py-1 px-2 rounded-xl text-brand-400";
 
       if (tabId === 'analytics') renderAnalyticsCharts();
     }
@@ -920,7 +870,7 @@
 
       const recentList = document.getElementById('dash-recent-list');
       if (transactions.length === 0) {
-        recentList.innerHTML = `<p class="text-xs text-slate-500 py-3 text-center">No transactions recorded yet. Tap '+' to add one.</p>`;
+        recentList.innerHTML = `<p class="text-xs text-slate-500 py-3 text-center">No transactions recorded yet.</p>`;
       } else {
         recentList.innerHTML = transactions.slice(0, 4).map(tx => `
           <div class="py-3 flex items-center justify-between">
@@ -955,7 +905,6 @@
         return matchesSearch && matchesType;
       });
 
-      // Desktop table
       const tbody = document.getElementById('full-transactions-tbody');
       tbody.innerHTML = filtered.map(tx => `
         <tr class="hover:bg-slate-900/40 transition-colors">
@@ -975,7 +924,6 @@
         </tr>
       `).join('');
 
-      // Mobile Card List
       const mobileList = document.getElementById('full-transactions-mobile-list');
       if (filtered.length === 0) {
         mobileList.innerHTML = `<p class="text-xs text-slate-500 py-6 text-center">No transactions found.</p>`;
@@ -1003,7 +951,6 @@
           </div>
         `).join('');
       }
-
       lucide.createIcons();
     }
 
