@@ -141,7 +141,7 @@
         </div>
 
         <!-- Add Transaction Button -->
-        <button onclick="openModal('transaction-modal')" class="flex items-center space-x-1.5 bg-gradient-to-r from-brand-600 to-emerald-500 hover:from-brand-500 hover:to-emerald-400 text-slate-950 font-bold text-xs sm:text-sm px-3.5 py-2 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95">
+        <button onclick="openTransactionModal()" class="flex items-center space-x-1.5 bg-gradient-to-r from-brand-600 to-emerald-500 hover:from-brand-500 hover:to-emerald-400 text-slate-950 font-bold text-xs sm:text-sm px-3.5 py-2 rounded-xl shadow-lg shadow-brand-500/20 transition-all active:scale-95">
           <i data-lucide="plus-circle" class="w-4 h-4 stroke-[2.5]"></i>
           <span class="hidden sm:inline">Add Record</span>
         </button>
@@ -204,7 +204,7 @@
         <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
         <span class="text-[10px] font-semibold mt-1">Records</span>
       </button>
-      <button onclick="openModal('transaction-modal')" class="flex flex-col items-center justify-center -mt-5 w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 to-emerald-400 text-slate-950 font-bold shadow-lg shadow-brand-500/30">
+      <button onclick="openTransactionModal()" class="flex flex-col items-center justify-center -mt-5 w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 to-emerald-400 text-slate-950 font-bold shadow-lg shadow-brand-500/30">
         <i data-lucide="plus" class="w-6 h-6 stroke-[3]"></i>
       </button>
       <button onclick="switchTab('analytics')" id="mobile-nav-analytics" class="mobile-nav-item flex flex-col items-center py-1 px-2 rounded-xl text-slate-400">
@@ -388,7 +388,7 @@
             <h3 class="text-lg font-bold text-white">Multi-Wallet Accounts</h3>
             <p class="text-xs text-slate-400">Cash, TBI, ZainCash & Parallel USD Accounts</p>
           </div>
-          <button onclick="openModal('wallet-modal')" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
+          <button onclick="openWalletModal()" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
             <i data-lucide="plus-circle" class="w-4 h-4"></i>
             <span>Add Wallet</span>
           </button>
@@ -406,7 +406,7 @@
             <h3 class="text-lg font-bold text-white">Target Savings Vaults</h3>
             <p class="text-xs text-slate-400">Goal-oriented savings converted dynamically</p>
           </div>
-          <button onclick="openModal('vault-modal')" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
+          <button onclick="openVaultModal()" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
             <i data-lucide="target" class="w-4 h-4"></i>
             <span>Add Vault</span>
           </button>
@@ -424,7 +424,7 @@
             <h3 class="text-lg font-bold text-white">Investment Assets</h3>
             <p class="text-xs text-slate-400">Iraqi Gold Miskals, Real Estate & Parallel Holdings</p>
           </div>
-          <button onclick="openModal('investment-modal')" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
+          <button onclick="openInvestmentModal()" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
             <i data-lucide="trending-up" class="w-4 h-4"></i>
             <span>Add Asset</span>
           </button>
@@ -442,7 +442,7 @@
             <h3 class="text-lg font-bold text-white">Recurring Bills</h3>
             <p class="text-xs text-slate-400">Generator, Fiber Internet & Rent tracking</p>
           </div>
-          <button onclick="openModal('bill-modal')" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
+          <button onclick="openBillModal()" class="bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-xl transition-all flex items-center space-x-1">
             <i data-lucide="plus" class="w-4 h-4"></i>
             <span>Add Bill</span>
           </button>
@@ -509,14 +509,15 @@
     </div>
   </div>
 
-  <!-- Add Transaction Modal -->
+  <!-- Add/Edit Transaction Modal -->
   <div id="transaction-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="glass-panel w-full max-w-md rounded-2xl p-6 border border-slate-700/80 shadow-2xl relative max-h-[90vh] overflow-y-auto">
       <button onclick="closeModal('transaction-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <h3 class="text-lg font-bold text-white mb-4">Add Transaction</h3>
+      <h3 id="tx-modal-title" class="text-lg font-bold text-white mb-4">Add Transaction</h3>
       <form id="tx-form" onsubmit="handleSaveTransaction(event)" class="space-y-4">
+        <input type="hidden" id="tx-edit-id" value="">
         <div>
           <label class="block text-xs text-slate-400 mb-1">Type</label>
           <select id="tx-type" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
@@ -544,7 +545,7 @@
           <label class="block text-xs text-slate-400 mb-1">Description</label>
           <input type="text" id="tx-desc" required placeholder="e.g. Neighborhood Generator Fee" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
         </div>
-        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs uppercase tracking-wider">Save Transaction</button>
+        <button type="submit" id="tx-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs uppercase tracking-wider">Save Transaction</button>
       </form>
     </div>
   </div>
@@ -555,14 +556,15 @@
       <button onclick="closeModal('wallet-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <h3 class="text-lg font-bold text-white mb-4">Add Wallet</h3>
+      <h3 id="wallet-modal-title" class="text-lg font-bold text-white mb-4">Add Wallet</h3>
       <form onsubmit="handleSaveWallet(event)" class="space-y-4">
+        <input type="hidden" id="wallet-edit-id" value="">
         <div>
           <label class="block text-xs text-slate-400 mb-1">Wallet Name</label>
           <input type="text" id="wallet-name" required placeholder="e.g. ZainCash Wallet" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none">
         </div>
         <div>
-          <label class="block text-xs text-slate-400 mb-1">Initial Balance (IQD)</label>
+          <label class="block text-xs text-slate-400 mb-1">Balance (IQD)</label>
           <input type="number" id="wallet-balance" required placeholder="e.g. 250000" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none">
         </div>
         <div>
@@ -573,7 +575,7 @@
             <option value="Digital">Digital Wallet</option>
           </select>
         </div>
-        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs uppercase tracking-wider">Create Wallet</button>
+        <button type="submit" id="wallet-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs uppercase tracking-wider">Save Wallet</button>
       </form>
     </div>
   </div>
@@ -584,8 +586,9 @@
       <button onclick="closeModal('vault-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <h3 class="text-lg font-bold text-white mb-4">Create Savings Vault</h3>
+      <h3 id="vault-modal-title" class="text-lg font-bold text-white mb-4">Create Savings Vault</h3>
       <form onsubmit="handleSaveVault(event)" class="space-y-4">
+        <input type="hidden" id="vault-edit-id" value="">
         <div>
           <label class="block text-xs text-slate-400 mb-1">Vault Goal Name</label>
           <input type="text" id="vault-name" required placeholder="e.g. Erbil Trip Goal" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
@@ -598,7 +601,7 @@
           <label class="block text-xs text-slate-400 mb-1">Current Saved (IQD)</label>
           <input type="number" id="vault-current" required placeholder="e.g. 300000" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
         </div>
-        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Add Savings Goal</button>
+        <button type="submit" id="vault-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Vault</button>
       </form>
     </div>
   </div>
@@ -609,8 +612,9 @@
       <button onclick="closeModal('investment-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <h3 class="text-lg font-bold text-white mb-4">Add Asset</h3>
+      <h3 id="investment-modal-title" class="text-lg font-bold text-white mb-4">Add Asset</h3>
       <form onsubmit="handleSaveInvestment(event)" class="space-y-4">
+        <input type="hidden" id="inv-edit-id" value="">
         <div>
           <label class="block text-xs text-slate-400 mb-1">Asset Name</label>
           <input type="text" id="inv-name" required placeholder="e.g. 21K Iraqi Gold Miskal" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
@@ -623,7 +627,7 @@
           <label class="block text-xs text-slate-400 mb-1">Estimated Return / Growth</label>
           <input type="text" id="inv-return" required placeholder="e.g. +7.5%" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
         </div>
-        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Asset</button>
+        <button type="submit" id="inv-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Asset</button>
       </form>
     </div>
   </div>
@@ -634,8 +638,9 @@
       <button onclick="closeModal('bill-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <h3 class="text-lg font-bold text-white mb-4">Add Recurring Bill</h3>
+      <h3 id="bill-modal-title" class="text-lg font-bold text-white mb-4">Add Recurring Bill</h3>
       <form onsubmit="handleSaveBill(event)" class="space-y-4">
+        <input type="hidden" id="bill-edit-id" value="">
         <div>
           <label class="block text-xs text-slate-400 mb-1">Bill Name</label>
           <input type="text" id="bill-name" required placeholder="e.g. Fiber Internet" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
@@ -648,7 +653,7 @@
           <label class="block text-xs text-slate-400 mb-1">Due Date</label>
           <input type="text" id="bill-date" required placeholder="e.g. 1st of every month" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white">
         </div>
-        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Bill</button>
+        <button type="submit" id="bill-submit-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-slate-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Save Bill</button>
       </form>
     </div>
   </div>
@@ -844,6 +849,7 @@
       renderVaults();
       renderInvestments();
       renderBills();
+      updateDynamicCharts();
     }
 
     function renderDashboard() {
@@ -908,9 +914,12 @@
             </span>
             <span class="text-[10px] text-slate-400">${formatUsdEquivalent(tx.amount)}</span>
           </td>
-          <td class="p-3 text-center">
-            <button onclick="deleteTransaction('${tx.id}')" class="text-slate-500 hover:text-rose-400 transition-colors">
-              <i data-lucide="trash-2" class="w-4 h-4"></i>
+          <td class="p-3 text-center space-x-2">
+            <button onclick="editTransaction('${tx.id}')" class="text-slate-400 hover:text-brand-400 transition-colors" title="Edit">
+              <i data-lucide="edit" class="w-4 h-4 inline"></i>
+            </button>
+            <button onclick="deleteTransaction('${tx.id}')" class="text-slate-500 hover:text-rose-400 transition-colors" title="Delete">
+              <i data-lucide="trash-2" class="w-4 h-4 inline"></i>
             </button>
           </td>
         </tr>
@@ -919,27 +928,60 @@
       lucide.createIcons();
     }
 
+    function openTransactionModal() {
+      document.getElementById('tx-edit-id').value = '';
+      document.getElementById('tx-modal-title').innerText = 'Add Transaction';
+      document.getElementById('tx-submit-btn').innerText = 'Save Transaction';
+      document.getElementById('tx-form').reset();
+      openModal('transaction-modal');
+    }
+
+    function editTransaction(id) {
+      const tx = transactions.find(t => t.id === id);
+      if (!tx) return;
+      document.getElementById('tx-edit-id').value = tx.id;
+      document.getElementById('tx-type').value = tx.type;
+      document.getElementById('tx-amount').value = tx.amount;
+      document.getElementById('tx-category').value = tx.category;
+      document.getElementById('tx-desc').value = tx.desc;
+      document.getElementById('tx-modal-title').innerText = 'Edit Transaction';
+      document.getElementById('tx-submit-btn').innerText = 'Update Transaction';
+      openModal('transaction-modal');
+    }
+
     function handleSaveTransaction(e) {
       e.preventDefault();
+      const editId = document.getElementById('tx-edit-id').value;
       const type = document.getElementById('tx-type').value;
       const amount = parseFloat(document.getElementById('tx-amount').value);
       const category = document.getElementById('tx-category').value;
       const desc = document.getElementById('tx-desc').value;
 
-      const newTx = {
-        id: Date.now().toString(),
-        type,
-        amount,
-        category,
-        desc,
-        date: new Date().toISOString().split('T')[0]
-      };
+      if (editId) {
+        const tx = transactions.find(t => t.id === editId);
+        if (tx) {
+          tx.type = type;
+          tx.amount = amount;
+          tx.category = category;
+          tx.desc = desc;
+        }
+        showToast('Transaction updated!');
+      } else {
+        const newTx = {
+          id: Date.now().toString(),
+          type,
+          amount,
+          category,
+          desc,
+          date: new Date().toISOString().split('T')[0]
+        };
+        transactions.unshift(newTx);
+        showToast('Transaction recorded!');
+      }
 
-      transactions.unshift(newTx);
       saveToStorage();
       closeModal('transaction-modal');
       renderAllData();
-      showToast('Transaction recorded!');
     }
 
     function deleteTransaction(id) {
@@ -949,13 +991,17 @@
       showToast('Transaction removed');
     }
 
+    // WALLETS
     function renderWallets() {
       const grid = document.getElementById('wallets-grid');
       grid.innerHTML = wallets.map(w => `
-        <div class="glass-card rounded-2xl p-5 space-y-3">
+        <div class="glass-card rounded-2xl p-5 space-y-3 relative">
           <div class="flex items-center justify-between">
             <span class="text-xs font-semibold px-2 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700/50">${w.type}</span>
-            <i data-lucide="wallet" class="w-5 h-5 text-brand-400"></i>
+            <div class="space-x-2">
+              <button onclick="editWallet('${w.id}')" class="text-slate-400 hover:text-brand-400"><i data-lucide="edit" class="w-4 h-4 inline"></i></button>
+              <button onclick="deleteWallet('${w.id}')" class="text-slate-500 hover:text-rose-400"><i data-lucide="trash-2" class="w-4 h-4 inline"></i></button>
+            </div>
           </div>
           <div>
             <h4 class="text-sm font-bold text-white">${w.name}</h4>
@@ -967,118 +1013,298 @@
       lucide.createIcons();
     }
 
+    function openWalletModal() {
+      document.getElementById('wallet-edit-id').value = '';
+      document.getElementById('wallet-modal-title').innerText = 'Add Wallet';
+      document.getElementById('wallet-submit-btn').innerText = 'Create Wallet';
+      document.getElementById('wallet-name').value = '';
+      document.getElementById('wallet-balance').value = '';
+      openModal('wallet-modal');
+    }
+
+    function editWallet(id) {
+      const w = wallets.find(item => item.id === id);
+      if (!w) return;
+      document.getElementById('wallet-edit-id').value = w.id;
+      document.getElementById('wallet-name').value = w.name;
+      document.getElementById('wallet-balance').value = w.balance;
+      document.getElementById('wallet-type').value = w.type;
+      document.getElementById('wallet-modal-title').innerText = 'Edit Wallet';
+      document.getElementById('wallet-submit-btn').innerText = 'Update Wallet';
+      openModal('wallet-modal');
+    }
+
     function handleSaveWallet(e) {
       e.preventDefault();
+      const editId = document.getElementById('wallet-edit-id').value;
       const name = document.getElementById('wallet-name').value;
       const balance = parseFloat(document.getElementById('wallet-balance').value);
       const type = document.getElementById('wallet-type').value;
 
-      wallets.push({ id: Date.now().toString(), name, balance, type });
+      if (editId) {
+        const w = wallets.find(item => item.id === editId);
+        if (w) { w.name = name; w.balance = balance; w.type = type; }
+        showToast('Wallet updated!');
+      } else {
+        wallets.push({ id: Date.now().toString(), name, balance, type });
+        showToast('Wallet created!');
+      }
+
       saveToStorage();
       closeModal('wallet-modal');
       renderWallets();
-      showToast('Wallet created!');
+      renderDashboard();
     }
 
+    function deleteWallet(id) {
+      wallets = wallets.filter(w => w.id !== id);
+      saveToStorage();
+      renderWallets();
+      renderDashboard();
+      showToast('Wallet deleted');
+    }
+
+    // VAULTS
     function renderVaults() {
       const grid = document.getElementById('vaults-grid');
       grid.innerHTML = vaults.map(v => {
         const pct = Math.min(100, Math.round((v.current / v.target) * 100));
         return `
-          <div class="glass-card rounded-2xl p-5 space-y-3">
+          <div class="glass-card rounded-2xl p-5 space-y-3 relative">
             <div class="flex items-center justify-between">
               <h4 class="text-sm font-bold text-white">${v.name}</h4>
-              <span class="text-xs font-bold text-emerald-400">${pct}%</span>
+              <div class="flex items-center space-x-2">
+                <span class="text-xs font-bold text-emerald-400">${pct}%</span>
+                <button onclick="editVault('${v.id}')" class="text-slate-400 hover:text-brand-400"><i data-lucide="edit" class="w-3.5 h-3.5 inline"></i></button>
+                <button onclick="deleteVault('${v.id}')" class="text-slate-500 hover:text-rose-400"><i data-lucide="trash-2" class="w-3.5 h-3.5 inline"></i></button>
+              </div>
             </div>
             <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
               <div class="bg-gradient-to-r from-brand-600 to-emerald-400 h-full transition-all duration-700" style="width: ${pct}%"></div>
             </div>
             <div class="flex justify-between text-xs text-slate-400 pt-1">
-              <span>Saved: ${formatMoney(v.current)} (${formatUsdEquivalent(v.current)})</span>
+              <span>Saved: ${formatMoney(v.current)}</span>
               <span>Goal: ${formatMoney(v.target)}</span>
             </div>
           </div>
         `;
       }).join('');
+      lucide.createIcons();
+    }
+
+    function openVaultModal() {
+      document.getElementById('vault-edit-id').value = '';
+      document.getElementById('vault-modal-title').innerText = 'Create Savings Vault';
+      document.getElementById('vault-submit-btn').innerText = 'Add Savings Goal';
+      document.getElementById('vault-name').value = '';
+      document.getElementById('vault-target').value = '';
+      document.getElementById('vault-current').value = '';
+      openModal('vault-modal');
+    }
+
+    function editVault(id) {
+      const v = vaults.find(item => item.id === id);
+      if (!v) return;
+      document.getElementById('vault-edit-id').value = v.id;
+      document.getElementById('vault-name').value = v.name;
+      document.getElementById('vault-target').value = v.target;
+      document.getElementById('vault-current').value = v.current;
+      document.getElementById('vault-modal-title').innerText = 'Edit Savings Vault';
+      document.getElementById('vault-submit-btn').innerText = 'Update Vault Goal';
+      openModal('vault-modal');
     }
 
     function handleSaveVault(e) {
       e.preventDefault();
+      const editId = document.getElementById('vault-edit-id').value;
       const name = document.getElementById('vault-name').value;
       const target = parseFloat(document.getElementById('vault-target').value);
       const current = parseFloat(document.getElementById('vault-current').value);
 
-      vaults.push({ id: Date.now().toString(), name, target, current });
+      if (editId) {
+        const v = vaults.find(item => item.id === editId);
+        if (v) { v.name = name; v.target = target; v.current = current; }
+        showToast('Vault updated!');
+      } else {
+        vaults.push({ id: Date.now().toString(), name, target, current });
+        showToast('Vault created!');
+      }
+
       saveToStorage();
       closeModal('vault-modal');
       renderVaults();
-      showToast('Vault created!');
     }
 
+    function deleteVault(id) {
+      vaults = vaults.filter(v => v.id !== id);
+      saveToStorage();
+      renderVaults();
+      showToast('Vault deleted');
+    }
+
+    // INVESTMENTS
     function renderInvestments() {
       const grid = document.getElementById('investments-grid');
       grid.innerHTML = investments.map(inv => `
-        <div class="glass-card rounded-2xl p-5 space-y-2">
+        <div class="glass-card rounded-2xl p-5 space-y-2 relative">
           <div class="flex justify-between items-center">
             <h4 class="text-sm font-bold text-white">${inv.name}</h4>
-            <span class="text-xs font-bold text-emerald-400">${inv.returnPct}</span>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-bold text-emerald-400">${inv.returnPct}</span>
+              <button onclick="editInvestment('${inv.id}')" class="text-slate-400 hover:text-brand-400"><i data-lucide="edit" class="w-3.5 h-3.5 inline"></i></button>
+              <button onclick="deleteInvestment('${inv.id}')" class="text-slate-500 hover:text-rose-400"><i data-lucide="trash-2" class="w-3.5 h-3.5 inline"></i></button>
+            </div>
           </div>
           <p class="text-lg font-extrabold text-white">${formatMoney(inv.value)}</p>
           <p class="text-xs text-slate-400">${formatUsdEquivalent(inv.value)}</p>
         </div>
       `).join('');
+      lucide.createIcons();
+    }
+
+    function openInvestmentModal() {
+      document.getElementById('inv-edit-id').value = '';
+      document.getElementById('investment-modal-title').innerText = 'Add Asset';
+      document.getElementById('inv-submit-btn').innerText = 'Save Asset';
+      document.getElementById('inv-name').value = '';
+      document.getElementById('inv-value').value = '';
+      document.getElementById('inv-return').value = '';
+      openModal('investment-modal');
+    }
+
+    function editInvestment(id) {
+      const inv = investments.find(item => item.id === id);
+      if (!inv) return;
+      document.getElementById('inv-edit-id').value = inv.id;
+      document.getElementById('inv-name').value = inv.name;
+      document.getElementById('inv-value').value = inv.value;
+      document.getElementById('inv-return').value = inv.returnPct;
+      document.getElementById('investment-modal-title').innerText = 'Edit Asset';
+      document.getElementById('inv-submit-btn').innerText = 'Update Asset';
+      openModal('investment-modal');
     }
 
     function handleSaveInvestment(e) {
       e.preventDefault();
+      const editId = document.getElementById('inv-edit-id').value;
       const name = document.getElementById('inv-name').value;
       const value = parseFloat(document.getElementById('inv-value').value);
       const returnPct = document.getElementById('inv-return').value;
 
-      investments.push({ id: Date.now().toString(), name, value, returnPct });
+      if (editId) {
+        const inv = investments.find(item => item.id === editId);
+        if (inv) { inv.name = name; inv.value = value; inv.returnPct = returnPct; }
+        showToast('Asset updated!');
+      } else {
+        investments.push({ id: Date.now().toString(), name, value, returnPct });
+        showToast('Asset added!');
+      }
+
       saveToStorage();
       closeModal('investment-modal');
       renderInvestments();
-      showToast('Asset added!');
+      renderDashboard();
+    }
+
+    function deleteInvestment(id) {
+      investments = investments.filter(i => i.id !== id);
+      saveToStorage();
+      renderInvestments();
+      renderDashboard();
+      showToast('Asset deleted');
     }
 
     function renderBills() {
       const grid = document.getElementById('bills-grid');
       grid.innerHTML = bills.map(b => `
-        <div class="glass-card rounded-2xl p-5 space-y-2 border-l-4 border-l-amber-500">
+        <div class="glass-card rounded-2xl p-5 space-y-2 border-l-4 border-l-amber-500 relative">
           <div class="flex justify-between items-center">
             <h4 class="text-sm font-bold text-white">${b.name}</h4>
-            <span class="text-xs text-amber-400 font-semibold">${b.dueDate}</span>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs text-amber-400 font-semibold">${b.dueDate}</span>
+              <button onclick="editBill('${b.id}')" class="text-slate-400 hover:text-brand-400"><i data-lucide="edit" class="w-3.5 h-3.5 inline"></i></button>
+              <button onclick="deleteBill('${b.id}')" class="text-slate-500 hover:text-rose-400"><i data-lucide="trash-2" class="w-3.5 h-3.5 inline"></i></button>
+            </div>
           </div>
           <p class="text-lg font-extrabold text-white">${formatMoney(b.amount)}</p>
           <p class="text-xs text-slate-400">${formatUsdEquivalent(b.amount)}</p>
         </div>
       `).join('');
+      lucide.createIcons();
+    }
+
+    function openBillModal() {
+      document.getElementById('bill-edit-id').value = '';
+      document.getElementById('bill-modal-title').innerText = 'Add Recurring Bill';
+      document.getElementById('bill-submit-btn').innerText = 'Save Bill';
+      document.getElementById('bill-name').value = '';
+      document.getElementById('bill-amount').value = '';
+      document.getElementById('bill-date').value = '';
+      openModal('bill-modal');
+    }
+
+    function editBill(id) {
+      const b = bills.find(item => item.id === id);
+      if (!b) return;
+      document.getElementById('bill-edit-id').value = b.id;
+      document.getElementById('bill-name').value = b.name;
+      document.getElementById('bill-amount').value = b.amount;
+      document.getElementById('bill-date').value = b.dueDate;
+      document.getElementById('bill-modal-title').innerText = 'Edit Recurring Bill';
+      document.getElementById('bill-submit-btn').innerText = 'Update Bill';
+      openModal('bill-modal');
     }
 
     function handleSaveBill(e) {
       e.preventDefault();
+      const editId = document.getElementById('bill-edit-id').value;
       const name = document.getElementById('bill-name').value;
       const amount = parseFloat(document.getElementById('bill-amount').value);
       const dueDate = document.getElementById('bill-date').value;
 
-      bills.push({ id: Date.now().toString(), name, amount, dueDate });
+      if (editId) {
+        const b = bills.find(item => item.id === editId);
+        if (b) { b.name = name; b.amount = amount; b.dueDate = dueDate; }
+        showToast('Bill updated!');
+      } else {
+        bills.push({ id: Date.now().toString(), name, amount, dueDate });
+        showToast('Bill added!');
+      }
+
       saveToStorage();
       closeModal('bill-modal');
       renderBills();
-      showToast('Bill added!');
     }
 
+    function deleteBill(id) {
+      bills = bills.filter(b => b.id !== id);
+      saveToStorage();
+      renderBills();
+      showToast('Bill deleted');
+    }
+
+    // DYNAMIC CHARTS ENGINE
     function initCharts() {
+      const totalIncome = transactions.filter(t => t.type === 'INCOME').reduce((acc, t) => acc + t.amount, 0);
+      const totalExpenses = transactions.filter(t => t.type === 'EXPENSE').reduce((acc, t) => acc + t.amount, 0);
+
+      // Category breakdown aggregation
+      let catMap = {};
+      transactions.filter(t => t.type === 'EXPENSE').forEach(t => {
+        catMap[t.category] = (catMap[t.category] || 0) + t.amount;
+      });
+      const catLabels = Object.keys(catMap).length > 0 ? Object.keys(catMap) : ['No Expenses'];
+      const catValues = Object.keys(catMap).length > 0 ? Object.values(catMap) : [1];
+
       const ctxCashflow = document.getElementById('cashflowChart').getContext('2d');
       cashflowChartObj = new Chart(ctxCashflow, {
         type: 'line',
         data: {
-          labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          labels: ['Current Period'],
           datasets: [
             {
               label: 'Income (IQD)',
-              data: [2100000, 2300000, 2200000, 2500000, 2400000, 2500000],
+              data: [totalIncome],
               borderColor: '#22c55e',
               backgroundColor: 'rgba(34, 197, 94, 0.1)',
               fill: true,
@@ -1086,7 +1312,7 @@
             },
             {
               label: 'Expenses (IQD)',
-              data: [800000, 950000, 720000, 1100000, 890000, 230000],
+              data: [totalExpenses],
               borderColor: '#f43f5e',
               backgroundColor: 'rgba(244, 63, 94, 0.1)',
               fill: true,
@@ -1109,10 +1335,10 @@
       categoryChartObj = new Chart(ctxCat, {
         type: 'doughnut',
         data: {
-          labels: ['Generator', 'Food', 'Shopping', 'Others'],
+          labels: catLabels,
           datasets: [{
-            data: [120000, 45000, 65000, 30000],
-            backgroundColor: ['#eab308', '#38bdf8', '#ec4899', '#64748b']
+            data: catValues,
+            backgroundColor: ['#eab308', '#38bdf8', '#ec4899', '#22c55e', '#a855f7', '#64748b']
           }]
         },
         options: {
@@ -1123,18 +1349,53 @@
       });
     }
 
+    function updateDynamicCharts() {
+      const totalIncome = transactions.filter(t => t.type === 'INCOME').reduce((acc, t) => acc + t.amount, 0);
+      const totalExpenses = transactions.filter(t => t.type === 'EXPENSE').reduce((acc, t) => acc + t.amount, 0);
+
+      let catMap = {};
+      transactions.filter(t => t.type === 'EXPENSE').forEach(t => {
+        catMap[t.category] = (catMap[t.category] || 0) + t.amount;
+      });
+      const catLabels = Object.keys(catMap).length > 0 ? Object.keys(catMap) : ['No Expenses'];
+      const catValues = Object.keys(catMap).length > 0 ? Object.values(catMap) : [1];
+
+      if (cashflowChartObj) {
+        cashflowChartObj.data.datasets[0].data = [totalIncome];
+        cashflowChartObj.data.datasets[1].data = [totalExpenses];
+        cashflowChartObj.update();
+      }
+
+      if (categoryChartObj) {
+        categoryChartObj.data.labels = catLabels;
+        categoryChartObj.data.datasets[0].data = catValues;
+        categoryChartObj.update();
+      }
+    }
+
     function renderAnalyticsCharts() {
       if (analyticsCatChartObj) analyticsCatChartObj.destroy();
       if (analyticsRatioChartObj) analyticsRatioChartObj.destroy();
+
+      let catMap = {};
+      transactions.filter(t => t.type === 'EXPENSE').forEach(t => {
+        catMap[t.category] = (catMap[t.category] || 0) + t.amount;
+      });
+      const catLabels = Object.keys(catMap).length > 0 ? Object.keys(catMap) : ['No Expenses'];
+      const catValues = Object.keys(catMap).length > 0 ? Object.values(catMap) : [0];
+
+      const totalIncome = transactions.filter(t => t.type === 'INCOME').reduce((acc, t) => acc + t.amount, 0);
+      const totalExpenses = transactions.filter(t => t.type === 'EXPENSE').reduce((acc, t) => acc + t.amount, 0);
+      const savedAmount = Math.max(0, totalIncome - totalExpenses);
 
       const ctx1 = document.getElementById('analyticsCategoryChart').getContext('2d');
       analyticsCatChartObj = new Chart(ctx1, {
         type: 'bar',
         data: {
-          labels: ['Generator', 'Food', 'Shopping', 'Others'],
+          labels: catLabels,
           datasets: [{
             label: 'Spent (IQD)',
-            data: [120000, 45000, 65000, 30000],
+            data: catValues,
             backgroundColor: '#22c55e'
           }]
         },
@@ -1153,9 +1414,9 @@
       analyticsRatioChartObj = new Chart(ctx2, {
         type: 'pie',
         data: {
-          labels: ['Saved', 'Spent'],
+          labels: ['Net Saved', 'Spent'],
           datasets: [{
-            data: [2270000, 230000],
+            data: [savedAmount, totalExpenses],
             backgroundColor: ['#22c55e', '#f43f5e']
           }]
         },
